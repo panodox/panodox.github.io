@@ -1,313 +1,175 @@
-:root{
+<!DOCTYPE html>
+<html>
+<head>
 
---bg:#ffffff;
---text:#111;
---grey:#777;
---line:#dedede;
+<title>panodox</title>
 
-}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<link rel="stylesheet" href="style.css">
 
-*{
+</head>
 
-box-sizing:border-box;
 
-}
+<body>
 
 
-body{
+<nav>
 
-margin:0;
-background:var(--bg);
-color:var(--text);
+<div class="logo">
+panodox
+</div>
 
-font-family:"IBM Plex Mono", monospace;
+<div class="navright">
+v0.2.0
+</div>
 
-}
+</nav>
 
 
-nav{
 
-height:80px;
+<main>
 
-display:flex;
-align-items:center;
-justify-content:space-between;
 
-padding:0 7%;
+<section class="hero">
 
-border-bottom:1px solid var(--line);
 
-position:sticky;
-top:0;
+<div class="small">
+// curious student
+</div>
 
-background:white;
 
-z-index:10;
+<h1>
+making<br>
+<em>interesting things</em>
+</h1>
 
-}
 
+<p>
+studying mathematics.<br>
+thinking about life.<br>
+probably procrastinating homework.
+</p>
 
-.logo{
 
-font-size:15px;
 
-}
+<div class="line"></div>
 
 
-.links{
+<div class="status">
 
-display:flex;
-gap:30px;
+STATUS
 
-}
+<span>
+under construction
+</span>
 
+</div>
 
-a{
 
-text-decoration:none;
-color:#555;
+</section>
 
-transition:.2s;
 
-}
 
 
-a:hover{
+<div class="interests">
 
-color:black;
+math
 
-}
+<span>//</span>
 
+physics
 
-.version{
+<span>//</span>
 
-color:#999;
-font-size:13px;
+music
 
-}
+<span>//</span>
 
+chinese
 
+<span>//</span>
 
-main{
+chess
 
-max-width:1100px;
-margin:auto;
+</div>
 
-padding:0 7%;
 
-}
 
 
 
-.hero{
+<section class="pages">
 
-padding-top:140px;
-padding-bottom:120px;
 
-}
+<a href="learning.html">
 
+<div>
+01
+</div>
 
+Learning
 
-.label{
+<p>
+things currently being studied
+</p>
 
-font-size:13px;
-color:#888;
+</a>
 
-margin-bottom:40px;
 
-}
 
 
-h1{
+<a href="archive.html">
 
-font-size:80px;
+<div>
+02
+</div>
 
-font-weight:400;
+Archive
 
-line-height:.95;
+<p>
+photos, memories, random moments
+</p>
 
-margin:0;
+</a>
 
-letter-spacing:-3px;
 
-}
 
 
-h1 em{
+<a href="music.html">
 
-font-family:"Crimson Pro",serif;
+<div>
+03
+</div>
 
-font-weight:400;
+Music
 
-}
+<p>
+songs and playlists
+</p>
 
+</a>
 
 
-.subtitle{
+</section>
 
-margin-top:50px;
 
-font-size:18px;
 
-line-height:2;
+</main>
 
-color:#555;
 
-}
 
 
+<footer>
 
-.status{
+© panodox
 
-display:flex;
+<br>
 
-gap:100px;
+learning things since yesterday
 
-margin-top:70px;
+</footer>
 
-font-size:14px;
 
-}
-
-
-.status span{
-
-font-size:11px;
-
-color:#999;
-
-text-transform:uppercase;
-
-}
-
-
-
-.interest{
-
-display:flex;
-
-align-items:center;
-
-gap:30px;
-
-margin-bottom:120px;
-
-}
-
-
-.interest p{
-
-font-size:13px;
-color:#555;
-
-}
-
-
-.line{
-
-height:1px;
-background:var(--line);
-flex:1;
-
-}
-
-
-
-.about{
-
-display:grid;
-
-grid-template-columns:100px 1fr;
-
-border-top:1px solid var(--line);
-
-padding-top:80px;
-
-padding-bottom:150px;
-
-}
-
-
-
-.number{
-
-color:#999;
-
-}
-
-
-
-h2{
-
-font-size:40px;
-
-font-weight:400;
-
-}
-
-
-
-.about p{
-
-max-width:600px;
-
-line-height:2;
-
-color:#555;
-
-}
-
-
-
-footer{
-
-border-top:1px solid var(--line);
-
-padding:30px 7%;
-
-display:flex;
-
-justify-content:space-between;
-
-color:#999;
-
-font-size:12px;
-
-}
-
-
-
-
-@media(max-width:700px){
-
-h1{
-
-font-size:50px;
-
-}
-
-
-.links{
-
-display:none;
-
-}
-
-
-.status{
-
-flex-direction:column;
-
-gap:30px;
-
-}
-
-
-.about{
-
-grid-template-columns:1fr;
-
-}
-
-}
+</body>
+</html>
