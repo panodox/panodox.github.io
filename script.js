@@ -701,7 +701,7 @@ let visits =
 
 if (visits === null) {
 
-    visits = 1;
+    visits = 67;
 
 } else {
 
