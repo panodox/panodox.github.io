@@ -56,8 +56,8 @@ document.addEventListener("DOMContentLoaded", () => {
         glowX += (mouseX - glowX) * 0.15;
         glowY += (mouseY - glowY) * 0.15;
 
-        glow.style.transform =
-            `translate(${glowX}px, ${glowY}px)`;
+       glow.style.left = glowX + "px";
+glow.style.top = glowY + "px";
 
         requestAnimationFrame(animateGlow);
     }
