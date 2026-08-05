@@ -1001,6 +1001,19 @@ a:hover::after {
 
 }
 
+.visitor {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    color: #9b9b9b;
+
+    font-size: .85rem;
+
+}
 
 
 
