@@ -198,7 +198,42 @@ glow.style.top = glowY + "px";
         }
 
     });
+// ------------------------------------
+// Floating Dust
+// ------------------------------------
 
+const dust = document.getElementById("dust");
+
+for (let i = 0; i < 45; i++) {
+
+    const particle = document.createElement("div");
+
+    particle.className = "dust-particle";
+
+    particle.style.left =
+        Math.random() * 100 + "%";
+
+    particle.style.animationDuration =
+        (15 + Math.random() * 25) + "s";
+
+    particle.style.animationDelay =
+        (-Math.random() * 20) + "s";
+
+    particle.style.opacity =
+        0.15 + Math.random() * 0.35;
+
+    const size =
+        1 + Math.random() * 3;
+
+    particle.style.width =
+        size + "px";
+
+    particle.style.height =
+        size + "px";
+
+    dust.appendChild(particle);
+
+}
     // ------------------------------------
     // Console message
     // ------------------------------------
