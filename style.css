@@ -62,40 +62,34 @@ body.loaded {
 }
 
 /* ===========================
-   Cursor glow
+   Cursor Blob
 =========================== */
 
 #cursor-glow {
 
     position: fixed;
 
-    width: 180px;
-    height: 180px;
+    width: 18px;
+    height: 18px;
+
+    background: #111;
 
     border-radius: 50%;
 
     pointer-events: none;
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,220,170,.35),
-            rgba(255,220,170,.12),
-            transparent 70%
-        );
-
-    filter: blur(22px);
-
-    opacity: .65;
-
-    z-index: 3;
+    z-index: 200;
 
     transform: translate(-50%, -50%);
 
-    transition: opacity .35s ease;
+    transition:
+        width .2s ease,
+        height .2s ease,
+        opacity .2s ease;
+
+    mix-blend-mode: multiply;
 
 }
-
 
 /* ===========================
    Floating Dust
