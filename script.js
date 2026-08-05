@@ -687,7 +687,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+// ------------------------------------
+// Visitor Counter
+// ------------------------------------
 
+const visitorElement =
+    document.getElementById("visitor-count");
+
+
+let visits =
+    localStorage.getItem("panodox-visits");
+
+
+if (visits === null) {
+
+    visits = 1;
+
+} else {
+
+    visits++;
+
+}
+
+
+localStorage.setItem(
+    "panodox-visits",
+    visits
+);
+
+
+
+visitorElement.textContent =
+    String(visits).padStart(4, "0");
 
 
 
