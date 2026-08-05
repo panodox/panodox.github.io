@@ -1,2 +1,5 @@
-# panodox.github.io
-website project
+# panodox
+
+A small personal website.
+
+Built with plain HTML, CSS, and JavaScript.
