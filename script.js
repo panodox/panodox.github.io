@@ -35,35 +35,37 @@ document.addEventListener("DOMContentLoaded", () => {
         comment.textContent =
             greetings[Math.floor(Math.random() * greetings.length)];
     }
+// ------------------------------------
+// Cursor Blob
+// ------------------------------------
 
-    // ------------------------------------
-    // Mouse Glow
-    // ------------------------------------
+let mouseX = window.innerWidth / 2;
+let mouseY = window.innerHeight / 2;
 
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
+let blobX = mouseX;
+let blobY = mouseY;
 
-    let glowX = mouseX;
-    let glowY = mouseY;
+window.addEventListener("mousemove", e => {
 
-    window.addEventListener("mousemove", e => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
+    mouseX = e.clientX;
+    mouseY = e.clientY;
 
-    function animateGlow() {
+});
 
-        glowX += (mouseX - glowX) * 0.15;
-        glowY += (mouseY - glowY) * 0.15;
 
-       glow.style.left = glowX + "px";
-glow.style.top = glowY + "px";
+function animateBlob() {
 
-        requestAnimationFrame(animateGlow);
-    }
+    blobX += (mouseX - blobX) * 0.25;
+    blobY += (mouseY - blobY) * 0.25;
 
-    animateGlow();
+    glow.style.left = blobX + "px";
+    glow.style.top = blobY + "px";
 
+    requestAnimationFrame(animateBlob);
+
+}
+
+animateBlob();
     // ------------------------------------
     // Card Tilt
     // ------------------------------------
@@ -158,17 +160,20 @@ glow.style.top = glowY + "px";
 
     document.querySelectorAll("a").forEach(link => {
 
-        link.addEventListener("mouseenter", () => {
+  link.addEventListener("mouseenter", () => {
 
-            glow.style.opacity = "0.9";
+    glow.style.width = "30px";
+    glow.style.height = "30px";
 
-        });
+});
 
-        link.addEventListener("mouseleave", () => {
 
-            glow.style.opacity = "0.55";
+link.addEventListener("mouseleave", () => {
 
-        });
+    glow.style.width = "18px";
+    glow.style.height = "18px";
+
+});
 
     });
 
