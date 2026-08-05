@@ -3,247 +3,702 @@
 // script.js
 // ===============================
 
+
 document.addEventListener("DOMContentLoaded", () => {
 
+
     const card = document.querySelector(".card");
-    const glow = document.getElementById("cursor-glow");
+
+    const cursor = document.getElementById("cursor-glow");
+
     const sections = document.querySelectorAll("section");
+
     const footer = document.querySelector("footer");
+
     const comment = document.querySelector(".comment");
 
+
+
+
     // ------------------------------------
-    // Fade In
+    // Fade in
     // ------------------------------------
+
 
     requestAnimationFrame(() => {
+
         document.body.classList.add("loaded");
+
     });
 
-    // ------------------------------------
-    // Random greeting (2%)
-    // ------------------------------------
-
-    const greetings = [
-        "// HELLO",
-        "// WELCOME",
-        "// GOOD EVENING",
-        "// GOOD MORNING",
-        "// HI"
-    ];
-
-    if (Math.random() < 0.02) {
-        comment.textContent =
-            greetings[Math.floor(Math.random() * greetings.length)];
-    }
-// ------------------------------------
-// Cursor Blob
-// ------------------------------------
-
-let mouseX = window.innerWidth / 2;
-let mouseY = window.innerHeight / 2;
-
-let blobX = mouseX;
-let blobY = mouseY;
-
-window.addEventListener("mousemove", e => {
-
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-
-});
 
 
-function animateBlob() {
 
-    blobX += (mouseX - blobX) * 0.25;
-    blobY += (mouseY - blobY) * 0.25;
 
-    glow.style.left = blobX + "px";
-    glow.style.top = blobY + "px";
 
-    requestAnimationFrame(animateBlob);
-
-}
-
-animateBlob();
-    // ------------------------------------
-    // Card Tilt
-    // ------------------------------------
-
-    window.addEventListener("mousemove", e => {
-
-        const rect = card.getBoundingClientRect();
-
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        const rotateY = ((x - centerX) / centerX) * 1.3;
-        const rotateX = -((y - centerY) / centerY) * 1.3;
-
-        card.style.transform =
-            `
-            perspective(1400px)
-            rotateX(${rotateX}deg)
-            rotateY(${rotateY}deg)
-            translateY(-2px)
-            `;
-
-        const shadowX = rotateY * 5;
-        const shadowY = 20 + rotateX * -4;
-
-        card.style.boxShadow =
-            `${shadowX}px ${shadowY}px 55px rgba(0,0,0,.07)`;
-    });
 
     // ------------------------------------
-    // Reset card when mouse leaves
+    // Intro typing
     // ------------------------------------
 
-    document.addEventListener("mouseleave", () => {
 
-        card.style.transform =
-            "perspective(1400px) rotateX(0deg) rotateY(0deg)";
+    const line1 = document.getElementById("line1");
 
-        card.style.boxShadow =
-            "0 18px 55px rgba(0,0,0,.07)";
-    });
+    const line2 = document.getElementById("line2");
 
-    // ------------------------------------
-    // Stagger section reveal
-    // ------------------------------------
 
-    const observer = new IntersectionObserver(entries => {
 
-        entries.forEach(entry => {
+    function typeText(element, text, speed, callback) {
 
-            if (entry.isIntersecting) {
 
-                entry.target.classList.add("visible");
+        let i = 0;
+
+
+        function typing() {
+
+
+            if (i < text.length) {
+
+
+                element.textContent += text[i];
+
+
+                i++;
+
+
+                setTimeout(
+                    typing,
+                    speed
+                );
+
+
+            } else {
+
+
+                if(callback)
+                    callback();
+
+
             }
 
-        });
 
-    }, {
-        threshold: 0.15
+        }
+
+
+        typing();
+
+
+    }
+
+
+
+
+
+    typeText(
+
+        line1,
+
+        "high school student",
+
+        65,
+
+        () => {
+
+
+            typeText(
+
+                line2,
+
+                "thinking about math and science",
+
+                45
+
+            );
+
+
+        }
+
+    );
+
+
+
+
+
+
+
+
+    // ------------------------------------
+    // Live date/time
+    // ------------------------------------
+
+
+    const dateElement =
+        document.getElementById("date");
+
+
+    const timeElement =
+        document.getElementById("time");
+
+
+
+
+    function updateClock(){
+
+
+        const now = new Date();
+
+
+
+        dateElement.textContent =
+
+            "last updated: " +
+
+            now.toLocaleDateString("en-AU");
+
+
+
+        timeElement.textContent =
+
+            "local time: " +
+
+            now.toLocaleTimeString(
+                "en-AU",
+                {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            );
+
+
+    }
+
+
+
+    updateClock();
+
+    setInterval(updateClock,1000);
+
+
+
+
+
+
+
+
+    // ------------------------------------
+    // Custom Cursor
+    // ------------------------------------
+
+
+    let mouseX = 0;
+
+    let mouseY = 0;
+
+
+    let cursorX = 0;
+
+    let cursorY = 0;
+
+
+
+
+    window.addEventListener(
+        "mousemove",
+        e => {
+
+
+            mouseX = e.clientX;
+
+            mouseY = e.clientY;
+
+
+        }
+    );
+
+
+
+
+
+    function animateCursor(){
+
+
+        cursorX +=
+            (mouseX - cursorX) * 0.35;
+
+
+        cursorY +=
+            (mouseY - cursorY) * 0.35;
+
+
+
+        cursor.style.left =
+            cursorX + "px";
+
+
+        cursor.style.top =
+            cursorY + "px";
+
+
+
+        requestAnimationFrame(
+            animateCursor
+        );
+
+
+    }
+
+
+
+    animateCursor();
+
+
+
+
+
+
+    // Cursor grows on links
+
+
+    document.querySelectorAll("a")
+    .forEach(link => {
+
+
+        link.addEventListener(
+            "mouseenter",
+            () => {
+
+
+                cursor.style.width =
+                    "22px";
+
+
+                cursor.style.height =
+                    "22px";
+
+
+            }
+        );
+
+
+
+        link.addEventListener(
+            "mouseleave",
+            () => {
+
+
+                cursor.style.width =
+                    "12px";
+
+
+                cursor.style.height =
+                    "12px";
+
+
+            }
+        );
+
+
     });
 
-    sections.forEach(section => observer.observe(section));
+
+
+
+
+
+
+
+
+    // ------------------------------------
+    // Card tilt
+    // ------------------------------------
+
+
+
+    window.addEventListener(
+        "mousemove",
+        e => {
+
+
+            const rect =
+                card.getBoundingClientRect();
+
+
+
+            const x =
+                e.clientX - rect.left;
+
+
+            const y =
+                e.clientY - rect.top;
+
+
+
+            const centerX =
+                rect.width / 2;
+
+
+            const centerY =
+                rect.height / 2;
+
+
+
+            const rotateY =
+                ((x-centerX)/centerX)*1.3;
+
+
+
+            const rotateX =
+                -((y-centerY)/centerY)*1.3;
+
+
+
+
+
+            card.style.transform =
+
+            `
+
+            perspective(1400px)
+
+            rotateX(${rotateX}deg)
+
+            rotateY(${rotateY}deg)
+
+            translateY(-2px)
+
+            `;
+
+
+
+            card.style.boxShadow =
+
+            `
+
+            ${rotateY*5}px
+
+            ${20 + rotateX*-4}px
+
+            55px
+
+            rgba(0,0,0,.07)
+
+            `;
+
+
+
+        }
+    );
+
+
+
+
+
+
+    document.addEventListener(
+        "mouseleave",
+        () => {
+
+
+            card.style.transform =
+
+            "perspective(1400px) rotateX(0deg) rotateY(0deg)";
+
+
+
+            card.style.boxShadow =
+
+            "0 18px 55px rgba(0,0,0,.07)";
+
+
+        }
+    );
+
+
+
+
+
+
+
+
+
+    // ------------------------------------
+    // Section reveal
+    // ------------------------------------
+
+
+    const observer =
+        new IntersectionObserver(
+
+            entries => {
+
+
+                entries.forEach(entry => {
+
+
+                    if(entry.isIntersecting){
+
+
+                        entry.target.classList.add(
+                            "visible"
+                        );
+
+
+                    }
+
+
+                });
+
+
+            },
+
+            {
+                threshold:0.15
+            }
+
+        );
+
+
+
+    sections.forEach(
+        section =>
+            observer.observe(section)
+    );
+
 
     observer.observe(footer);
 
+
+
+
+
+
+
+
     // ------------------------------------
-    // Floating animation
+    // Floating card
     // ------------------------------------
+
 
     let t = 0;
 
-    function floatCard() {
+
+    function floatCard(){
+
 
         t += 0.008;
 
-        const y = Math.sin(t) * 2;
 
-        card.style.marginTop = `${y}px`;
+        const y =
+            Math.sin(t)*2;
 
-        requestAnimationFrame(floatCard);
+
+
+        card.style.marginTop =
+            `${y}px`;
+
+
+
+        requestAnimationFrame(
+            floatCard
+        );
+
 
     }
 
+
     floatCard();
 
+
+
+
+
+
+
+
     // ------------------------------------
-    // Smooth hover on links
+    // Floating Dust
     // ------------------------------------
 
-    document.querySelectorAll("a").forEach(link => {
 
-  link.addEventListener("mouseenter", () => {
-
-    glow.style.width = "30px";
-    glow.style.height = "30px";
-
-});
+    const dust =
+        document.getElementById("dust");
 
 
-link.addEventListener("mouseleave", () => {
 
-    glow.style.width = "18px";
-    glow.style.height = "18px";
+    for(let i=0;i<45;i++){
 
-});
 
-    });
+        const particle =
+            document.createElement("div");
+
+
+
+        particle.className =
+            "dust-particle";
+
+
+
+        particle.style.left =
+            Math.random()*100 + "%";
+
+
+
+        particle.style.animationDuration =
+            (15 + Math.random()*25) + "s";
+
+
+
+        particle.style.animationDelay =
+            (-Math.random()*20) + "s";
+
+
+
+        const size =
+            1 + Math.random()*3;
+
+
+
+        particle.style.width =
+            size+"px";
+
+
+        particle.style.height =
+            size+"px";
+
+
+
+        dust.appendChild(
+            particle
+        );
+
+
+    }
+
+
+
+
+
+
+
+
 
     // ------------------------------------
     // Keyboard easter egg
-    // type "math"
+    // Type "math"
     // ------------------------------------
+
 
     let typed = "";
 
-    window.addEventListener("keydown", e => {
 
-        typed += e.key.toLowerCase();
 
-        if (typed.length > 10)
-            typed = typed.slice(-10);
+    window.addEventListener(
+        "keydown",
+        e => {
 
-        if (typed.includes("math")) {
 
-            document.body.classList.add("math-mode");
+            typed +=
+                e.key.toLowerCase();
 
-            setTimeout(() => {
-                document.body.classList.remove("math-mode");
-            }, 2500);
 
-            typed = "";
+
+            if(typed.length > 10)
+
+                typed =
+                    typed.slice(-10);
+
+
+
+
+            if(typed.includes("math")){
+
+
+                document.body.classList.add(
+                    "math-mode"
+                );
+
+
+
+                setTimeout(
+                    () => {
+
+                        document.body.classList.remove(
+                            "math-mode"
+                        );
+
+                    },
+
+                    2500
+
+                );
+
+
+
+                typed="";
+
+
+            }
+
+
         }
+    );
 
-    });
-// ------------------------------------
-// Floating Dust
-// ------------------------------------
 
-const dust = document.getElementById("dust");
 
-for (let i = 0; i < 45; i++) {
 
-    const particle = document.createElement("div");
 
-    particle.className = "dust-particle";
 
-    particle.style.left =
-        Math.random() * 100 + "%";
 
-    particle.style.animationDuration =
-        (15 + Math.random() * 25) + "s";
 
-    particle.style.animationDelay =
-        (-Math.random() * 20) + "s";
+    // ------------------------------------
+    // Random greeting
+    // ------------------------------------
 
-    particle.style.opacity =
-        0.15 + Math.random() * 0.35;
 
-    const size =
-        1 + Math.random() * 3;
+    const greetings = [
 
-    particle.style.width =
-        size + "px";
+        "// HELLO",
 
-    particle.style.height =
-        size + "px";
+        "// WELCOME",
 
-    dust.appendChild(particle);
+        "// GOOD EVENING",
 
-}
+        "// GOOD MORNING",
+
+        "// HI"
+
+    ];
+
+
+
+    if(Math.random()<0.02){
+
+
+        comment.textContent =
+
+            greetings[
+                Math.floor(
+                    Math.random()*greetings.length
+                )
+            ];
+
+
+    }
+
+
+
+
+
+
+
+
     // ------------------------------------
     // Console message
     // ------------------------------------
 
+
     console.log(`
+
 ────────────────────────────
 
 hello :)
@@ -253,6 +708,9 @@ thanks for looking around.
 — panodox
 
 ────────────────────────────
+
 `);
+
+
 
 });
