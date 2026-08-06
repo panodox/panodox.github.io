@@ -1,5 +1,4 @@
 # panodox
 
-A small personal website.
-
-Built with plain HTML, CSS, and JavaScript.
+personal website
+html css js
